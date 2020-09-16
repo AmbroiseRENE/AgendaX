@@ -1,58 +1,75 @@
 package com.fr.Agenda.AgendaX.service.impl;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 
 import com.fr.Agenda.AgendaX.entity.Team;
+import com.fr.Agenda.AgendaX.repository.ITeamRepository;
 import com.fr.Agenda.AgendaX.service.ITeamService;
 
 public class TeamServiceImpl implements ITeamService{
 
-	@Override
-	public Team create(Team entity) {
-		// TODO Auto-generated method stub
-		return null;
+	@Autowired
+	private ITeamRepository repo;
+
+	public Team create(Team team) {
+		if (repo.exists(Example.of(team))) {
+			return null;
+		} else {
+			return repo.save(team);
+		}
 	}
 
-	@Override
-	public Team update(Team entity) {
-		// TODO Auto-generated method stub
-		return null;
+	public Team update(Team team) {
+		if (repo.existsById(team.getId())) {
+			return repo.save(team);
+		} else {
+			return null;
+		}
 	}
 
-	@Override
 	public Team readById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return repo.findById(id).get();
+		} catch (NoSuchElementException e) {
+			return null;
+		}
 	}
 
-	@Override
 	public List<Team> readAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.findByDeletedFalse();
 	}
 
-	@Override
 	public List<Team> readDelete() {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.findByDeletedTrue();
 	}
 
-	@Override
 	public List<Team> readAllReal() {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.findAll();
 	}
 
-	@Override
 	public boolean deleteById(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+		if (repo.existsById(id)) {
+			repo.deleteById(id);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
-	@Override
 	public boolean setDeletedTrue(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+		if (repo.existsById(id)) {
+			if (repo.fakeDelete(id) == 1) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 
 }

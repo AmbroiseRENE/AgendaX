@@ -28,7 +28,7 @@ public class Manipulation extends AbstractEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 
 	@Column(nullable = false)
 	private String name;
@@ -36,18 +36,21 @@ public class Manipulation extends AbstractEntity {
 	@Column(nullable = false)
 	private String description;
 
-	@Column(nullable = false)
 	private LocalDateTime begginDate;
+
+	private LocalDateTime endDate;
 	
 	@OneToOne
 	@JoinColumn(name = "id_result")
 	private Result result;
-	
+
 	@OneToMany
 	@JoinColumn(name = "id_user")
 	private List<User> Users;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_experiment")
 	private Experiment experiments;
+
+
 }

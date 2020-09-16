@@ -1,6 +1,6 @@
 package com.fr.Agenda.AgendaX.constants;
 
-public class AbstractContants {
+public class AbstractConstants {
 
 	public static final String GLOBAL_PATH = "/api/";
 	private static final String CREATE_PATH = "";
@@ -28,6 +28,7 @@ public class AbstractContants {
 		public static final String GET_LASTNAME = BASE_PATH + "get-lastname/{lastName}/";
 		public static final String GET_CITY = BASE_PATH + "get-city/{city}/";
 		public static final String LOGIN = BASE_PATH + "login/";
+		public static final String GET_ZIPCODE = BASE_PATH +"get-zipcode/{zipCode}/";
 	}
 	
 	public static class Chief {

@@ -17,6 +17,8 @@ public interface IUserRepository extends JpaRepositoryImplementation<User, Long>
 	public List<User> findByLaboratory(String laboratory);
 
 	public List<User> findByCity(String city);
+	
+	public List<User> findByZipCode(int zipCode);
 
 	public User findByEmailAndPwd(String email, String pwd);
 

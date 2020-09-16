@@ -1,58 +1,75 @@
 package com.fr.Agenda.AgendaX.service.impl;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 
 import com.fr.Agenda.AgendaX.entity.Manipulation;
+import com.fr.Agenda.AgendaX.repository.IManipulationRepository;
 import com.fr.Agenda.AgendaX.service.IManipulationService;
 
 public class ManipulationServiceImpl implements IManipulationService{
 
-	@Override
-	public Manipulation create(Manipulation entity) {
-		// TODO Auto-generated method stub
-		return null;
+	@Autowired
+	private IManipulationRepository repo;
+
+	public Manipulation create(Manipulation manipulation) {
+		if (repo.exists(Example.of(manipulation))) {
+			return null;
+		} else {
+			return repo.save(manipulation);
+		}
 	}
 
-	@Override
-	public Manipulation update(Manipulation entity) {
-		// TODO Auto-generated method stub
-		return null;
+	public Manipulation update(Manipulation manipulation) {
+		if (repo.existsById(manipulation.getId())) {
+			return repo.save(manipulation);
+		} else {
+			return null;
+		}
 	}
 
-	@Override
 	public Manipulation readById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return repo.findById(id).get();
+		} catch (NoSuchElementException e) {
+			return null;
+		}
 	}
 
-	@Override
 	public List<Manipulation> readAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.findByDeletedFalse();
 	}
 
-	@Override
 	public List<Manipulation> readDelete() {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.findByDeletedTrue();
 	}
 
-	@Override
 	public List<Manipulation> readAllReal() {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.findAll();
 	}
 
-	@Override
 	public boolean deleteById(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+		if (repo.existsById(id)) {
+			repo.deleteById(id);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
-	@Override
 	public boolean setDeletedTrue(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+		if (repo.existsById(id)) {
+			if (repo.fakeDelete(id) == 1) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 
 }
