@@ -14,6 +14,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+
+
 @Entity
 @Getter
 @Setter
@@ -37,19 +39,19 @@ public class User extends AbstractEntity {
 	@Column(nullable = false)
 	protected String firstName;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	protected String adress;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	protected int zipCode;
 	
 	@Column(nullable = false)
 	protected String laboratory;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	protected String city;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	protected String phone;
 	
 	@Column(nullable = false)

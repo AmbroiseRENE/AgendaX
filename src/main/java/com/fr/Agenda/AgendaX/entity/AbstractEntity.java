@@ -1,7 +1,5 @@
 package com.fr.Agenda.AgendaX.entity;
 
-import java.time.LocalDateTime;
-
 import javax.persistence.MappedSuperclass;
 
 import lombok.Getter;
@@ -17,11 +15,5 @@ import lombok.ToString;
 public class AbstractEntity {
 
 	protected boolean deleted;
-	
-	protected LocalDateTime creationDate; 
-	
-	protected LocalDateTime ModificationDate; 
-	
-	protected LocalDateTime DeletedDate; 
 
 }

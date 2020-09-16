@@ -13,11 +13,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.fr.Agenda.AgendaX.constants.AbstractConstants;
 import com.fr.Agenda.AgendaX.dto.UserCreateDto;
 import com.fr.Agenda.AgendaX.dto.UserLoginDto;
 import com.fr.Agenda.AgendaX.dto.UserUpdateDto;
-import com.fr.Agenda.AgendaX.entity.User;
-import com.fr.Agenda.AgendaX.constants.AbstractConstants;
 
 @RequestMapping
 @CrossOrigin
@@ -45,7 +44,7 @@ public interface IUserController {
 	public List<UserCreateDto> findByZipCode(@PathVariable Integer zipCode);
 
 	@GetMapping(path = AbstractConstants.User.GET_CITY)
-	public List<User> findByCity(@PathVariable String city);
+	public List<UserCreateDto> findByCity(@PathVariable String city);
 
 	@GetMapping(path = AbstractConstants.User.READ_ALL)
 	public List<UserCreateDto> readAll();

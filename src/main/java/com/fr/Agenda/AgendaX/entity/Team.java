@@ -23,7 +23,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class Team extends AbstractEntity {
+public class Team extends AbstractEntity{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
