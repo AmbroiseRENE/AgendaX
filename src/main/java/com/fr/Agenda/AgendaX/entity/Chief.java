@@ -28,4 +28,8 @@ public class Chief extends User {
 	@OneToOne
 	@JoinColumn(name = "id_team")
 	protected Team team;
+
+	public Chief(String email, String pwd, String lastName, String firstName, String adress, int zipCode, String laboratory, String city, String phone, boolean admin) {
+		super(email, pwd, lastName, firstName, adress, zipCode, laboratory, city, phone, admin);
+	}
 }

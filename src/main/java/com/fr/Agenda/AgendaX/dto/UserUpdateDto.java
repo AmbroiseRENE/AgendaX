@@ -79,8 +79,6 @@ public class UserUpdateDto {
 				+ ", phone=" + phone + "laboratory="+laboratory +"]";
 	}
 
-	
-	
-}		
+}
 
 	

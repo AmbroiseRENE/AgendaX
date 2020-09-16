@@ -18,8 +18,8 @@ import com.fr.Agenda.AgendaX.service.IUserService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@RestController
 @Slf4j
+@RestController
 public class IUserControllerImpl implements IUserController{
 	
 	@Autowired

@@ -71,6 +71,4 @@ public class UserCreateDto {
 		return "CreateUserDto [email=" + email + ", lastName=" + lastName + ", firstName=" + firstName + ", adress="
 				+ adress + ", zipCode=" + zipCode + ", city=" + city + ", pwd=" + pwd + ", phone=" + phone + "laboratory="+laboratory +"]";
 	}
-	
-	
 }
