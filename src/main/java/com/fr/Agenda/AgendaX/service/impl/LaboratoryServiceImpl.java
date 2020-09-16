@@ -1,57 +1,75 @@
 package com.fr.Agenda.AgendaX.service.impl;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 
 import com.fr.Agenda.AgendaX.entity.Laboratory;
+import com.fr.Agenda.AgendaX.repository.ILaboratoryRepository;
 import com.fr.Agenda.AgendaX.service.ILaboratyService;
 
 public class LaboratoryServiceImpl implements ILaboratyService {
 
-	@Override
-	public Laboratory create(Laboratory entity) {
-		// TODO Auto-generated method stub
-		return null;
+	@Autowired
+	private ILaboratoryRepository repo;
+
+	public Laboratory create(Laboratory laboratory) {
+		if (repo.exists(Example.of(laboratory))) {
+			return null;
+		} else {
+			return repo.save(laboratory);
+		}
 	}
 
-	@Override
-	public Laboratory update(Laboratory entity) {
-		// TODO Auto-generated method stub
-		return null;
+	public Laboratory update(Laboratory laboratory) {
+		if (repo.existsById(laboratory.getId())) {
+			return repo.save(laboratory);
+		} else {
+			return null;
+		}
 	}
 
-	@Override
 	public Laboratory readById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return repo.findById(id).get();
+		} catch (NoSuchElementException e) {
+			return null;
+		}
 	}
 
-	@Override
 	public List<Laboratory> readAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.findByDeletedFalse();
 	}
 
-	@Override
 	public List<Laboratory> readDelete() {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.findByDeletedTrue();
 	}
 
-	@Override
 	public List<Laboratory> readAllReal() {
-		// TODO Auto-generated method stub
-		return null;
+		return repo.findAll();
 	}
 
-	@Override
 	public boolean deleteById(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+		if (repo.existsById(id)) {
+			repo.deleteById(id);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override
 	public boolean setDeletedTrue(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+		if (repo.existsById(id)) {
+			if (repo.fakeDelete(id) == 1) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 }

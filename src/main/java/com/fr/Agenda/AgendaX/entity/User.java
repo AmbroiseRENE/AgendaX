@@ -41,6 +41,9 @@ public class User extends AbstractEntity {
 	protected String adress;
 	
 	@Column(nullable = false)
+	protected int zipCode;
+	
+	@Column(nullable = false)
 	protected String laboratory;
 	
 	@Column(nullable = false)
@@ -56,4 +59,35 @@ public class User extends AbstractEntity {
 	@JoinColumn(name = "id_team")
 	protected Team team;
 
+	public User(String email, String pwd, String lastName, String firstName, String adress, int zipCode,
+			String laboratory, String city, String phone, boolean admin) {
+		super();
+		this.email = email;
+		this.pwd = pwd;
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.adress = adress;
+		this.zipCode = zipCode;
+		this.laboratory = laboratory;
+		this.city = city;
+		this.phone = phone;
+		this.admin = admin;
+	}
+
+	public User(Long id, String email, String pwd, String lastName, String firstName, String adress, int zipCode,
+			String laboratory, String city, String phone, boolean admin) {
+		super();
+		this.id = id;
+		this.email = email;
+		this.pwd = pwd;
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.adress = adress;
+		this.zipCode = zipCode;
+		this.laboratory = laboratory;
+		this.city = city;
+		this.phone = phone;
+		this.admin = admin;
+	}
+	
 }

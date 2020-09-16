@@ -10,27 +10,32 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter 
-@Setter 
+@Getter
+@Setter
 @NoArgsConstructor
-public class UserCreateDto {
+public class UserUpdateDto {
 
+	@ApiModelProperty(required = true)
+	protected Long id;
+	
 	@Email
 	@NotNull
 	@NotBlank
-	@ApiModelProperty(required = true, example = "adresse@gmail.com")
+	@ApiModelProperty(required = true, example = "mail@gmail.com")
 	protected String email;
 	
 	@NotNull
-	@ApiModelProperty(required = true, example = "John")
+	@ApiModelProperty(required = true, example = "Billy")
 	protected String lastName;
 	
 	@ApiModelProperty(required = false)
 	protected String firstName;
 	
+	@NotNull
 	@ApiModelProperty(required = true, example = "14 rue des vignerons")
 	protected String adress;
 	
+	@NotNull
 	@ApiModelProperty(required = true, example = "69000")
 	protected Integer zipCode;
 	
@@ -51,10 +56,11 @@ public class UserCreateDto {
 	@ApiModelProperty(required = true, example = "CNRS")
 	protected String laboratory;
 
-	public UserCreateDto(@Email @NotNull @NotBlank String email, @NotNull String lastName,
+	public UserUpdateDto(Long id, @Email @NotNull @NotBlank String email, @NotNull String lastName,
 			String firstName, @NotNull String adress, @NotNull Integer zipCode, @NotNull String city,
 			@NotNull @NotEmpty String pwd, String phone, String laboratory) {
 		super();
+		this.id = id;
 		this.email = email;
 		this.lastName = lastName;
 		this.firstName = firstName;
@@ -68,9 +74,13 @@ public class UserCreateDto {
 
 	@Override
 	public String toString() {
-		return "CreateUserDto [email=" + email + ", lastName=" + lastName + ", firstName=" + firstName + ", adress="
-				+ adress + ", zipCode=" + zipCode + ", city=" + city + ", pwd=" + pwd + ", phone=" + phone + "laboratory="+laboratory +"]";
+		return "UpdateCustomerDto [id=" + id + ", email=" + email + ", lastName=" + lastName + ", firstName="
+				+ firstName + ", adress=" + adress + ", zipCode=" + zipCode + ", city=" + city + ", pwd=" + pwd
+				+ ", phone=" + phone + "laboratory="+laboratory +"]";
 	}
+
 	
 	
-}
+}		
+
+	
